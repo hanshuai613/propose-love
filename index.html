@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>宝宝，原谅我好不好</title>
+    <title>我真的知道错了，求你原谅我</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #ffc0cb 0%, #ffe4e1 100%);
+            background: linear-gradient(135deg, #fdf2f8 0%, #fef7fb 100%);
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -27,10 +27,10 @@
             position: absolute;
             width: 18px;
             height: 18px;
-            background: #ff6b81;
+            background: #e53e3e;
             transform: rotate(45deg);
-            opacity: 0.6;
-            animation: float 5s ease-in-out infinite;
+            opacity: 0.5;
+            animation: float 6s ease-in-out infinite;
         }
 
         .heart::before, .heart::after {
@@ -38,7 +38,7 @@
             position: absolute;
             width: 18px;
             height: 18px;
-            background: #ff6b81;
+            background: #e53e3e;
             border-radius: 50%;
         }
 
@@ -47,37 +47,44 @@
 
         @keyframes float {
             0% { transform: rotate(45deg) translateY(0); }
-            50% { transform: rotate(45deg) translateY(-25px); }
+            50% { transform: rotate(45deg) translateY(-30px); }
             100% { transform: rotate(45deg) translateY(0); }
         }
 
         .container {
             background: white;
-            padding: 40px 50px;
+            padding: 40px 30px;
             border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             text-align: center;
             z-index: 10;
             max-width: 90vw;
+            width: 400px;
         }
 
         h1 {
-            color: #555;
-            font-size: 26px;
+            color: #2d3748;
+            font-size: 22px;
+            line-height: 1.6;
             margin-bottom: 30px;
-            line-height: 1.4;
+            font-weight: normal;
+        }
+
+        h1 span {
+            color: #e53e3e;
+            font-weight: bold;
         }
 
         .btn-group {
             display: flex;
-            gap: 25px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         button {
-            padding: 14px 32px;
-            font-size: 18px;
+            padding: 14px 30px;
+            font-size: 17px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -85,70 +92,107 @@
         }
 
         #yesBtn {
-            background: #7bed9f;
+            background: #38b2ac;
             color: white;
-            font-weight: bold;
+            font-weight: 500;
         }
 
         #yesBtn:hover {
             transform: scale(1.08);
-            background: #2ed573;
+            background: #319795;
+            box-shadow: 0 4px 12px rgba(49, 151, 149, 0.3);
         }
 
         #noBtn {
-            background: #ff7979;
+            background: #ed8936;
             color: white;
             position: relative;
         }
 
+        /* 反思清单样式 */
         .success-page {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8fb 100%);
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 100;
-            color: #2d3436;
+            color: #2d3748;
             padding: 20px;
+            overflow-y: auto;
         }
 
         .success-page h2 {
-            font-size: 36px;
-            margin-bottom: 15px;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #2d3748;
         }
 
-        .success-page p {
-            font-size: 20px;
+        .success-page .reflection {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            max-width: 90vw;
+            width: 400px;
+            text-align: left;
+            line-height: 1.8;
+        }
+
+        .success-page .reflection p {
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .success-page .reflection p strong {
+            color: #e53e3e;
+        }
+
+        .success-page .promise {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #38b2ac;
             text-align: center;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>我知道我错了<br>你愿意原谅我吗？🥺</h1>
+    <h1>我认真听完了所有话<br>也终于懂了你受的委屈<br><span>你愿意再给我一次改错的机会吗？🥺</span></h1>
     <div class="btn-group">
-        <button id="yesBtn">愿意原谅你 💛</button>
-        <button id="noBtn">暂时不原谅 ❌</button>
+        <button id="yesBtn">愿意给你机会 💛</button>
+        <button id="noBtn">还不能原谅 ❌</button>
     </div>
 </div>
 
 <div class="success-page" id="successPage">
-    <h2>太好啦！🥹</h2>
-    <p>我一定会好好改、好好爱你<br>再也不让你受委屈了</p>
+    <h2>谢谢你，我绝不会再让你失望 🫂</h2>
+    <div class="reflection">
+        <p>❶ <strong>我错在不会倾听</strong>：永远自我中心，你说话我不听，只按自己的理解判断，从不确认你的感受，还直接否定、反驳你；</p>
+        <p>❷ <strong>我错在逃避问题</strong>：永远觉得自己没错，是你想多、敏感，矛盾从不解决，只会逃避、装糊涂，出问题就跳过、拖延，最后都是你忍；</p>
+        <p>❸ <strong>我错在光说不做</strong>：承诺泛滥，行动极少，保证一大堆却没做到几件，用道歉、发誓哄你，不是真的想改，只是想留你；</p>
+        <p>❹ <strong>我错在欺骗失信</strong>：不止一次骗你，隐瞒、不真诚、打擦边球，让你对我彻底失去信任；</p>
+        <p>❺ <strong>我错在无视你的情绪</strong>：你难过、委屈我看不见、不在乎，不主动关心回应，让你觉得跟木头说话，很累；</p>
+        <p>❻ <strong>我错在不懂珍惜</strong>：把你当成「女朋友」的角色，没让你感受到偏爱和唯一，你在时敷衍，失去才紧张；</p>
+        <p>❼ <strong>我错在不成熟</strong>：用舔狗式讨好留住你，不是平等尊重的爱，没有底线和原则，让你觉得我不可靠、扛不起事；</p>
+        <p>❽ <strong>我错在让你看不到未来</strong>：你怕复合后我打回原形，怕一辈子赌我一时的改变，这些我都懂，也都认。</p>
+    </div>
+    <p class="promise">我会把每件事处理闭环，用行动证明我真的改了，<br>不是一时讨好，是一辈子的珍惜 💙</p>
 </div>
 
 <script>
 function createHearts() {
-    for (let i = 0; i < 18; i++) {
+    for (let i = 0; i < 22; i++) {
         const heart = document.createElement('div');
         heart.className = 'heart';
         heart.style.left = Math.random() * 100 + 'vw';
         heart.style.top = Math.random() * 100 + 'vh';
-        heart.style.animationDelay = Math.random() * 4 + 's';
+        heart.style.animationDelay = Math.random() * 5 + 's';
         const size = Math.random() * 12 + 10;
         heart.style.width = size + 'px';
         heart.style.height = size + 'px';
@@ -156,15 +200,18 @@ function createHearts() {
     }
 }
 
+// 弹窗文案对应她的委屈，每一句都是真诚的忏悔
 const popupTexts = [
-    "再给我一次机会好不好～",
-    "我真的知道错了呜呜",
-    "别不理我嘛 🥺",
-    "你一点我就原谅啦",
-    "我会乖乖听话的",
-    "再考虑一下下～",
-    "我不能没有你呀",
-    "原谅我这一次吧～"
+    "我知道我以前只会逃避，让你受了太多委屈",
+    "我错在从来没认真听你说话，总否定你的感受",
+    "我承诺的太多做到的太少，让你对我失去信任",
+    "我不该骗你、隐瞒你，让你觉得我不可靠",
+    "我知道你觉得我只是需要女朋友，没把你当唯一",
+    "我不该在你身边时敷衍，失去了才着急挽回",
+    "我知道你怕我改不了，我会用行动证明不是一时讨好",
+    "我真的想改，不是为了留你，是不想再失去你",
+    "我懂你觉得跟我看不到未来，我会一点点做给你看",
+    "我不该让你忍了一次又一次，对不起🥺"
 ];
 
 window.onload = function() {
@@ -173,11 +220,15 @@ window.onload = function() {
     const noBtn = document.getElementById('noBtn');
     const successPage = document.getElementById('successPage');
 
+    // 点击「愿意」显示反思清单
     yesBtn.addEventListener('click', () => {
         document.querySelector('.container').style.display = 'none';
         successPage.style.display = 'flex';
+        // 滚动到顶部（适配手机）
+        successPage.scrollTop = 0;
     });
 
+    // 「不原谅」按钮乱跑+弹窗忏悔
     function runAway() {
         const maxX = window.innerWidth - 140;
         const maxY = window.innerHeight - 70;
