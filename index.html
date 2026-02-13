@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宝贝，嫁给我吧！</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Comic Sans MS", "微软雅黑", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 爱心装饰 */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            transform: rotate(45deg);
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: -10px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: rotate(45deg) translateY(0) scale(0.8);
+            }
+            50% {
+                transform: rotate(45deg) translateY(-30px) scale(1);
+            }
+            100% {
+                transform: rotate(45deg) translateY(0) scale(0.8);
+            }
+        }
+
+        .container {
+            background: white;
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #e63946;
+            font-size: 32px;
+            margin-bottom: 40px;
+            animation: shake 2s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            background: #4ade80;
+            color: white;
+            font-weight: bold;
+        }
+
+        #yesBtn:hover {
+            background: #22c55e;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
+        }
+
+        #noBtn {
+            background: #f87171;
+            color: white;
+            position: relative;
+        }
+
+        /* 成功页面样式 */
+        .success-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            color: white;
+        }
+
+        .success-page h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .success-page p {
+            font-size: 24px;
+        }
+
+        /* 适配移动端 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 40px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .btn-group {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>宝贝，你愿意嫁给我吗？💍</h1>
+        <div class="btn-group">
+            <button id="yesBtn">愿意 💖</button>
+            <button id="noBtn">不愿意 🤐</button>
+        </div>
+    </div>
+
+    <!-- 成功页面 -->
+    <div class="success-page" id="successPage">
+        <h2>太好了！🥳</h2>
+        <p>我就知道你会答应我的！爱你哟～</p>
+    </div>
+
+    <script>
+        // 创建随机爱心装饰
+        function createHearts() {
+            const heartCount = 20;
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                // 随机位置和动画延迟
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.top = `${Math.random() * 100}vh`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                // 随机大小
+                const size = Math.random() * 15 + 10;
+                heart.style.width = `${size}px`;
+                heart.style.height = `${size}px`;
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.top = `${Math.random() * 100}vh`;
+                document.body.appendChild(heart);
+            }
+        }
+
+        // 搞怪弹窗文案
+        const popupTexts = [
+            "选这个不对哦～😜",
+            "再好好想想！🥺",
+            "你确定要伤我的心吗？💔",
+            "不许选这个！快选愿意～",
+            "我不听我不听，就要你说愿意！",
+            "手滑了吧？重新点～",
+            "这辈子你别想跑掉啦！",
+            "除了愿意，其他答案都无效！"
+        ];
+
+        // 初始化
+        window.onload = function() {
+            createHearts();
+            
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            const successPage = document.getElementById('successPage');
+
+            // 点击愿意按钮
+            yesBtn.addEventListener('click', function() {
+                document.querySelector('.container').style.display = 'none';
+                successPage.style.display = 'flex';
+            });
+
+            // 点击不愿意按钮（搞怪逻辑）
+            noBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // 随机选一个文案
+                const randomText = popupTexts[Math.floor(Math.random() * popupTexts.length)];
+                // 弹出搞怪提示
+                alert(randomText);
+                
+                // 让按钮随机移动（增加搞怪效果）
+                const maxX = window.innerWidth - 150;
+                const maxY = window.innerHeight - 80;
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+                
+                noBtn.style.position = 'absolute';
+                noBtn.style.left = `${randomX}px`;
+                noBtn.style.top = `${randomY}px`;
+            });
+
+            // 鼠标移到不愿意按钮上也移动（增加难度）
+            noBtn.addEventListener('mouseover', function() {
+                const maxX = window.innerWidth - 150;
+                const maxY = window.innerHeight - 80;
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+                
+                noBtn.style.position = 'absolute';
+                noBtn.style.left = `${randomX}px`;
+                noBtn.style.top = `${randomY}px`;
+            });
+        };
+    </script>
+</body>
+</html>
